@@ -1,0 +1,13 @@
+services:
+  shelfsync:
+    build: .
+    image: shelfsync:latest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      # Folder that contains metadata.db (your Calibre library). Must be writable.
+      - "/path/to/Calibre Library:/calibre"
+      # Keeps the sync memory between restarts
+      - ./data:/data
